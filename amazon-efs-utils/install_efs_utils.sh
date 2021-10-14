@@ -78,7 +78,7 @@ install_stunnel_ubuntu () {
 
 # patch the stunnel binary to support NFS TLS (only required for CentOS 7)
 patch_stunnel () {
-  PATCHVER="5.57"
+  PATCHVER="5.60"
   STUNNEL="stunnel-${PATCHVER}"
   CURVER=$(stunnel -version 2>&1 | grep "stunnel " | awk '{print $2}')
   if [[ ${CURVER} == ${PATCHVER} ]]; then
@@ -89,7 +89,7 @@ patch_stunnel () {
   echo "Patching stunnel to version ${PATCHVER} ..."
   yum install -y gcc openssl-devel tcp_wrappers-devel
   cd ${TMPDIR}
-  curl -o ${STUNNEL}.tar.gz https://www.stunnel.org/downloads/${STUNNEL}.tar.gz && \
+  curl -o ${STUNNEL}.tar.gz https://www.stunnel.org/archive/5.x/${STUNNEL}.tar.gz && \
   tar xvfz ${STUNNEL}.tar.gz && \
   cd ${STUNNEL}
   ./configure
